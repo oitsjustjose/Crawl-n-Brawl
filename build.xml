@@ -1,0 +1,70 @@
+<project name="game" default="compile" basedir=".">
+    <property name="src" location="src/"/>
+    <property name="assets" location="assets/"/>
+    <property name="build" location="build/"/>
+    <property name="lwjgl" location="../lib/lwjgl-2.9.3"/>
+    <property name="slick" location="../lib/slick-util"/>
+
+    <path id="project.class.path">
+        <pathelement path="{$classpath}"/>
+        <fileset dir="${lwjgl}">
+            <include name="jar/*.jar"/>
+        </fileset>
+        <fileset dir="${slick}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+
+    <target name="init">
+        <mkdir dir="${build}"/>
+    </target>
+
+
+    <target name="compile" depends="init" description="compile the source">
+        <javac srcdir="${src}"
+               destdir="${build}"
+               classpathref="project.class.path"
+               includeantruntime="false"/>
+    </target>
+
+    <target name="clean"
+            description="clean up">
+        <delete dir="${build}"/>
+    </target>
+
+    <condition property="native" value="${lwjgl}/native/macosx">
+        <os family="mac"/>
+    </condition>
+
+    <condition property="native" value="${lwjgl}/native/windows">
+        <os family="windows"/>
+    </condition>
+
+    <target name="run" description="run the compiled code" depends="compile">
+        <property name="native" location="natives"/>
+        <!-- <echo message="${native}" /> -->
+
+        <java classname="Defaults" fork="true">
+            <sysproperty key="java.library.path" value="${native}"/>
+            <!-- <sysproperty key="java.awt.headless" value="true" /> -->
+
+            <classpath refid="project.class.path"/>
+            <classpath>
+                <pathelement path="build/"/>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="check-syntax" depends="init" description="check for errors">
+        <javac destdir="${build}"
+               classpathref="project.class.path"
+               includeantruntime="false">
+            <src path="${CHK_SOURCES}"/>
+            <compilerarg value="-Xlint"/>
+        </javac>
+
+    </target>
+
+
+</project>
