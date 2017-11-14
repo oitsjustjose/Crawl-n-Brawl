@@ -1,7 +1,9 @@
 package com.oitsjustjose.crawlnbrawl.Scene;
 
+import com.oitsjustjose.crawlnbrawl.Game;
 import com.oitsjustjose.crawlnbrawl.Util.FileUtils;
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
@@ -74,6 +76,28 @@ public class Menu extends Scene
         updateButtons();
         drawButtons();
 
+        if (Keyboard.isKeyDown(Keyboard.KEY_F2))
+        {
+            Game.getInstance().screenshotManager.takeScreenshot();
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_F11))
+        {
+            if (Display.isFullscreen())
+            {
+                Game.getInstance().setDisplayMode(Game.getInstance().config.resolutionWidth, Game.getInstance().config.resolutionHeight, false);
+            }
+            else
+            {
+                Game.getInstance().setDisplayMode(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height, true);
+            }
+            Display.setResizable(true);
+            GL11.glViewport(0, 0, Display.getWidth(), Display.getHeight());
+            GL11.glMatrixMode(GL11.GL_PROJECTION);
+            GL11.glLoadIdentity();
+            GL11.glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1, -1);
+            adjustButtons();
+        }
+
         if (Mouse.isButtonDown(0))
         {
             for (Button b : buttons.keySet())
@@ -95,17 +119,12 @@ public class Menu extends Scene
 
     public void updateButtons()
     {
-        int buttonCount = buttons.keySet().size();
-
         for (Button b : buttons.keySet())
         {
             b.update();
             if (Display.wasResized())
             {
-                int x = (Display.getWidth() / 2) - (b.getHitBox().getWidth() / 2);
-                int y = (Display.getHeight() / 2) - (b.getHitBox().getHeight() * buttonCount) - ((buttonCount - buttons.keySet().size()) * 16);
-                b.getHitBox().setLocation(x, y);
-                buttonCount -= 1;
+                adjustButtons();
             }
         }
     }
@@ -115,6 +134,18 @@ public class Menu extends Scene
         for (Button b : buttons.keySet())
         {
             b.draw();
+        }
+    }
+
+    public void adjustButtons()
+    {
+        int buttonCount = buttons.keySet().size();
+        for (Button b : buttons.keySet())
+        {
+            int x = (Display.getWidth() / 2) - (b.getHitBox().getWidth() / 2);
+            int y = (Display.getHeight() / 2) - (b.getHitBox().getHeight() * buttonCount) + (b.getHitBox().getHeight() / buttonCount);
+            b.getHitBox().setLocation(x, y);
+            buttonCount -= 1;
         }
     }
 

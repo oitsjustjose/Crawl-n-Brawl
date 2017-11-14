@@ -52,8 +52,8 @@ public class Game
     public void initGame()
     {
         Menu menu = new Menu();
-        menu.addButton(new Button((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Play", new Color(200, 200, 200), new Color(85, 124, 0)), new Dungeon());
-        menu.addButton(new Button((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 16, 128, 32, "Exit", new Color(200, 200, 200), new Color(85, 124, 0)), null);
+        menu.addButton(new Button((Display.getWidth() / 2) - 128, (Display.getHeight() / 2), 256, 64, "Play", new Color(200, 200, 200), new Color(85, 124, 0)), new Dungeon());
+        menu.addButton(new Button((Display.getWidth() / 2) - 128, (Display.getHeight() / 2), 256, 64, "Exit", new Color(200, 200, 200), new Color(85, 124, 0)), null);
         Scene currScene = menu;
 
         while (currScene.go())
