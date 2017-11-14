@@ -4,8 +4,8 @@ import com.oitsjustjose.crawlnbrawl.Entity.Living.EntityMonster;
 import com.oitsjustjose.crawlnbrawl.Manager.AudioManager;
 import com.oitsjustjose.crawlnbrawl.Manager.SceneManager;
 import com.oitsjustjose.crawlnbrawl.Manager.ScreenshotManager;
-import com.oitsjustjose.crawlnbrawl.Scene.Dungeon;
 import com.oitsjustjose.crawlnbrawl.Scene.Button;
+import com.oitsjustjose.crawlnbrawl.Scene.Dungeon;
 import com.oitsjustjose.crawlnbrawl.Scene.Menu;
 import com.oitsjustjose.crawlnbrawl.Scene.Scene;
 import com.oitsjustjose.crawlnbrawl.Util.Config;
@@ -52,8 +52,9 @@ public class Game
     public void initGame()
     {
         Menu menu = new Menu();
-        menu.addButton(new Button((Display.getWidth() / 2) - 128, (Display.getHeight() / 2), 256, 64, "Play", new Color(200, 200, 200), new Color(85, 124, 0)), new Dungeon());
-        menu.addButton(new Button((Display.getWidth() / 2) - 128, (Display.getHeight() / 2), 256, 64, "Exit", new Color(200, 200, 200), new Color(85, 124, 0)), null);
+        menu.addButton(new Button(256, 64, "Play", new Color(200, 200, 200), new Color(85, 124, 0)), new Dungeon());
+        menu.addButton(new Button(256, 64, "Exit", new Color(200, 200, 200), new Color(85, 124, 0)), null);
+        menu.adjustButtons();
         Scene currScene = menu;
 
         while (currScene.go())

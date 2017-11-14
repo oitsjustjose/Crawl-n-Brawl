@@ -1,6 +1,7 @@
 package com.oitsjustjose.crawlnbrawl.Scene;
 
 import com.oitsjustjose.crawlnbrawl.Game;
+import com.oitsjustjose.crawlnbrawl.Tile.TileBackground;
 import com.oitsjustjose.crawlnbrawl.Util.FileUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
@@ -22,6 +23,7 @@ public class Menu extends Scene
     private LinkedHashMap<Button, Scene> buttons;
     private Scene nextScene;
     private TrueTypeFont titleFont;
+    private TileBackground bg;
 
     public Menu()
     {
@@ -38,6 +40,7 @@ public class Menu extends Scene
 
             Font awtFont = Font.createFont(Font.TRUETYPE_FONT, font).deriveFont(titleAttributes).deriveFont(64F);
             titleFont = new TrueTypeFont(awtFont, false);
+            bg = new TileBackground("menu");
         }
         catch (IOException | FontFormatException e)
         {
@@ -72,6 +75,7 @@ public class Menu extends Scene
             GL11.glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1, -1);
         }
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+        bg.draw();
         titleFont.drawString((Display.getWidth() / 2) - (titleFont.getWidth("Crawl 'n Brawl") / 2), 64F, "Crawl 'n Brawl", new org.newdawn.slick.Color(0, 123, 124));
         updateButtons();
         drawButtons();

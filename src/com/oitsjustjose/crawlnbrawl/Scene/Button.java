@@ -25,9 +25,14 @@ public class Button
     private TrueTypeFont font;
     private boolean hovering;
 
-    public Button(int x, int y, int w, int h, String text)
+    public Button(int w, int h, String text)
     {
-        this(x, y, w, h, text, new Color(0, 0, 0), new Color(0.9F, 0.9F, 0.9F));
+        this(0, 0, w, h, text, new Color(0, 0, 0), new Color(0.9F, 0.9F, 0.9F));
+    }
+
+    public Button(int w, int h, String text, Color textColor, Color color)
+    {
+        this(0, 0, w, h, text, textColor, color);
     }
 
     public Button(int x, int y, int w, int h, String text, Color textColor, Color color)

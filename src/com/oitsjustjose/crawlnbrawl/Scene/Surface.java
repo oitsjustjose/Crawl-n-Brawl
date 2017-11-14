@@ -122,13 +122,14 @@ public class Surface extends SceneLevel
         Menu menu = new Menu();
         if (player == null || player.getState() == EntityPlayer.State.DEAD)
         {
-            menu.addButton(new Button((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Play Again", new Color(200, 200, 200), new Color(85, 124, 0)), new Dungeon());
+            menu.addButton(new Button(256, 64, "Play Again", new Color(200, 200, 200), new Color(85, 124, 0)), new Dungeon());
         }
         else
         {
-            menu.addButton(new Button((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Resume", new Color(200, 200, 200), new Color(85, 124, 0)), this);
+            menu.addButton(new Button(256, 64, "Resume", new Color(200, 200, 200), new Color(85, 124, 0)), this);
         }
-        menu.addButton(new Button((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 16, 128, 32, "Exit", new Color(200, 200, 200), new Color(85, 124, 0)), null);
+        menu.addButton(new Button(256, 64, "Exit", new Color(200, 200, 200), new Color(85, 124, 0)), null);
+        menu.adjustButtons();
         return menu;
     }
 
