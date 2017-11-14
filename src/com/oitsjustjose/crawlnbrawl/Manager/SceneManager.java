@@ -28,5 +28,4 @@ public class SceneManager
     {
         this.currentSceneLevel = s;
     }
-
 }

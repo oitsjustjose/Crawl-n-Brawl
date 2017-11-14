@@ -41,7 +41,7 @@ public class EntityPlayer extends EntityLiving
         this.health = 20F;
         this.maxHealth = 20F;
         this.speed = .6F;
-        this.heldItem = new ItemFist().setCursor();
+        this.heldItem = new ItemFist();
     }
 
     public EntityPlayer()
@@ -59,6 +59,10 @@ public class EntityPlayer extends EntityLiving
     @Override
     public void update(float delta)
     {
+        if(Mouse.getNativeCursor() == null && this.heldItem != null)
+        {
+            this.heldItem.setCursor();
+        }
         int motion = (int) (this.speed * delta);
         int verticalMotion = (int) (motion * motionMultiplier);
         if (Keyboard.isKeyDown(Keyboard.KEY_A) && this.box.getX() > 0 && !(this.state == State.STUNNED))

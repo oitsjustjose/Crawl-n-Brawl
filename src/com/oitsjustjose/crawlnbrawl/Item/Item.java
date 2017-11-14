@@ -45,7 +45,6 @@ public class Item
      */
     public Item setCursor()
     {
-
         InputStream stream = ResourceLoader.getResourceAsStream("assets/textures/items/".replace("/", File.separator) + iconString + ".png");
         BufferedImage cursorImg;
         try

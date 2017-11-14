@@ -1,10 +1,12 @@
 package com.oitsjustjose.crawlnbrawl;
 
 import com.oitsjustjose.crawlnbrawl.Entity.Living.EntityMonster;
+import com.oitsjustjose.crawlnbrawl.Entity.Living.EntityPlayer;
 import com.oitsjustjose.crawlnbrawl.Manager.AudioManager;
 import com.oitsjustjose.crawlnbrawl.Manager.SceneManager;
 import com.oitsjustjose.crawlnbrawl.Manager.ScreenshotManager;
 import com.oitsjustjose.crawlnbrawl.Scene.Dungeon;
+import com.oitsjustjose.crawlnbrawl.Scene.GUIButton;
 import com.oitsjustjose.crawlnbrawl.Scene.Menu;
 import com.oitsjustjose.crawlnbrawl.Scene.Scene;
 import com.oitsjustjose.crawlnbrawl.Util.Config;
@@ -49,11 +51,10 @@ public class Game
 
     public void initGame()
     {
-        com.oitsjustjose.crawlnbrawl.Scene.Menu gameMenu = new com.oitsjustjose.crawlnbrawl.Scene.Menu();
-        gameMenu.addItem("Play", new Dungeon());
-        gameMenu.addSpecial("Exit", Menu.DO_EXIT);
-
-        Scene currScene = gameMenu;
+        Menu menu = new Menu();
+        menu.addButton(new GUIButton((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Play"), new Dungeon());
+        menu.addButton(new GUIButton((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 16, 128, 32, "Exit"), null);
+        Scene currScene = menu;
 
         while (currScene.go())
         {
@@ -61,7 +62,7 @@ public class Game
 
             if (currScene == null)
             {
-                currScene = gameMenu;
+                currScene = menu;
             }
         }
 

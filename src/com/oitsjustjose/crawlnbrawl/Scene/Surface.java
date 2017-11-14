@@ -117,17 +117,17 @@ public class Surface extends SceneLevel
         {
             return new Dungeon();
         }
+
         Menu menu = new Menu();
         if (player == null || player.getState() == EntityPlayer.State.DEAD)
         {
-            menu.addItem("Play Again", new Dungeon());
+            menu.addButton(new GUIButton((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Play Again"), new Dungeon());
         }
         else
         {
-            menu.addItem("Resume", this);
+            menu.addButton(new GUIButton((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Resume"), this);
         }
-        menu.addSpecial("Exit", Menu.DO_EXIT);
-
+        menu.addButton(new GUIButton((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 16, 128, 32, "Exit"), null);
         return menu;
     }
 
