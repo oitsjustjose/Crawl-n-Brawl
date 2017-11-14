@@ -45,7 +45,7 @@
         <property name="native" location="natives"/>
         <!-- <echo message="${native}" /> -->
 
-        <java classname="Defaults" fork="true">
+        <java classname="com.oitsjustjose.crawlnbrawl.GameLauncher" fork="true">
             <sysproperty key="java.library.path" value="${native}"/>
             <!-- <sysproperty key="java.awt.headless" value="true" /> -->
 
