@@ -1,12 +1,11 @@
 package com.oitsjustjose.crawlnbrawl;
 
 import com.oitsjustjose.crawlnbrawl.Entity.Living.EntityMonster;
-import com.oitsjustjose.crawlnbrawl.Entity.Living.EntityPlayer;
 import com.oitsjustjose.crawlnbrawl.Manager.AudioManager;
 import com.oitsjustjose.crawlnbrawl.Manager.SceneManager;
 import com.oitsjustjose.crawlnbrawl.Manager.ScreenshotManager;
 import com.oitsjustjose.crawlnbrawl.Scene.Dungeon;
-import com.oitsjustjose.crawlnbrawl.Scene.GUIButton;
+import com.oitsjustjose.crawlnbrawl.Scene.Button;
 import com.oitsjustjose.crawlnbrawl.Scene.Menu;
 import com.oitsjustjose.crawlnbrawl.Scene.Scene;
 import com.oitsjustjose.crawlnbrawl.Util.Config;
@@ -14,6 +13,7 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.PNGDecoder;
 import org.newdawn.slick.util.ResourceLoader;
 
@@ -52,8 +52,8 @@ public class Game
     public void initGame()
     {
         Menu menu = new Menu();
-        menu.addButton(new GUIButton((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Play"), new Dungeon());
-        menu.addButton(new GUIButton((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 16, 128, 32, "Exit"), null);
+        menu.addButton(new Button((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Play", new Color(200, 200, 200), new Color(85, 124, 0)), new Dungeon());
+        menu.addButton(new Button((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 16, 128, 32, "Exit", new Color(200, 200, 200), new Color(85, 124, 0)), null);
         Scene currScene = menu;
 
         while (currScene.go())

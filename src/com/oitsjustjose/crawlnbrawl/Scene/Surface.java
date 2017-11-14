@@ -16,6 +16,7 @@ import com.oitsjustjose.crawlnbrawl.Util.FileUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.TextureImpl;
 import org.newdawn.slick.util.ResourceLoader;
@@ -121,13 +122,13 @@ public class Surface extends SceneLevel
         Menu menu = new Menu();
         if (player == null || player.getState() == EntityPlayer.State.DEAD)
         {
-            menu.addButton(new GUIButton((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Play Again"), new Dungeon());
+            menu.addButton(new Button((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Play Again", new Color(200, 200, 200), new Color(85, 124, 0)), new Dungeon());
         }
         else
         {
-            menu.addButton(new GUIButton((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Resume"), this);
+            menu.addButton(new Button((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Resume", new Color(200, 200, 200), new Color(85, 124, 0)), this);
         }
-        menu.addButton(new GUIButton((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 16, 128, 32, "Exit"), null);
+        menu.addButton(new Button((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 16, 128, 32, "Exit", new Color(200, 200, 200), new Color(85, 124, 0)), null);
         return menu;
     }
 

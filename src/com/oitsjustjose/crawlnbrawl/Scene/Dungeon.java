@@ -171,13 +171,13 @@ public class Dungeon extends SceneLevel
 
         if (player == null || player.getState() == EntityPlayer.State.DEAD)
         {
-            menu.addButton(new GUIButton((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Play Again"), new Dungeon());
+            menu.addButton(new Button((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Play Again", new org.newdawn.slick.Color(200, 200, 200), new org.newdawn.slick.Color(85, 124, 0)), new Dungeon());
         }
         else
         {
-            menu.addButton(new GUIButton((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Resume"), this);
+            menu.addButton(new Button((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 64, 128, 32, "Resume", new org.newdawn.slick.Color(200, 200, 200), new org.newdawn.slick.Color(85, 124, 0)), this);
         }
-        menu.addButton(new GUIButton((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 16, 128, 32, "Exit"), null);
+        menu.addButton(new Button((Display.getWidth() / 2) - 64, (Display.getHeight() / 2) - 16, 128, 32, "Exit", new org.newdawn.slick.Color(200, 200, 200), new org.newdawn.slick.Color(85, 124, 0)), null);
 
         return menu;
     }

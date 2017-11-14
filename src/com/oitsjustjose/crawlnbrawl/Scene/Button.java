@@ -16,7 +16,7 @@ import java.awt.FontFormatException;
 import java.io.File;
 import java.io.IOException;
 
-public class GUIButton
+public class Button
 {
     private String buttonText;
     private Rectangle box;
@@ -25,12 +25,12 @@ public class GUIButton
     private TrueTypeFont font;
     private boolean hovering;
 
-    public GUIButton(int x, int y, int w, int h, String text)
+    public Button(int x, int y, int w, int h, String text)
     {
         this(x, y, w, h, text, new Color(0, 0, 0), new Color(0.9F, 0.9F, 0.9F));
     }
 
-    public GUIButton(int x, int y, int w, int h, String text, Color textColor, Color color)
+    public Button(int x, int y, int w, int h, String text, Color textColor, Color color)
     {
         this.box = new Rectangle(x, y, w, h);
         this.buttonText = text;

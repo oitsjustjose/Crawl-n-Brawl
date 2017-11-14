@@ -1,19 +1,46 @@
 package com.oitsjustjose.crawlnbrawl.Scene;
 
+import com.oitsjustjose.crawlnbrawl.Util.FileUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.util.ResourceLoader;
 
+import java.awt.*;
+import java.awt.font.TextAttribute;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class Menu extends Scene
 {
-    private LinkedHashMap<GUIButton, Scene> buttons;
+    private LinkedHashMap<Button, Scene> buttons;
     private Scene nextScene;
+    private TrueTypeFont titleFont;
 
     public Menu()
     {
+        HashMap<TextAttribute, Integer> titleAttributes = new HashMap<>();
+        titleAttributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        try
+        {
+            File font = new File("natives/justabit.ttf".replace("/", File.separator)).getAbsoluteFile();
+            if (!font.exists())
+            {
+                System.out.println("Font did not exist; copying...");
+                FileUtils.copyStream(ResourceLoader.getResourceAsStream("assets/justabit.ttf"), new File("natives/justabit.ttf".replace("/", File.separator)));
+            }
+
+            Font awtFont = Font.createFont(Font.TRUETYPE_FONT, font).deriveFont(titleAttributes).deriveFont(64F);
+            titleFont = new TrueTypeFont(awtFont, false);
+        }
+        catch (IOException | FontFormatException e)
+        {
+            titleFont = new TrueTypeFont(new Font("Arial", Font.PLAIN, 64).deriveFont(titleAttributes).deriveFont(64F), false);
+        }
         try
         {
             Mouse.setNativeCursor(null);
@@ -25,7 +52,7 @@ public class Menu extends Scene
         buttons = new LinkedHashMap<>();
     }
 
-    public void addButton(GUIButton button, Scene scene)
+    public void addButton(Button button, Scene scene)
     {
         buttons.put(button, scene);
     }
@@ -42,15 +69,14 @@ public class Menu extends Scene
             GL11.glLoadIdentity();
             GL11.glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1, -1);
         }
-
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
-
+        titleFont.drawString((Display.getWidth() / 2) - (titleFont.getWidth("Crawl 'n Brawl") / 2), 64F, "Crawl 'n Brawl", new org.newdawn.slick.Color(0, 123, 124));
         updateButtons();
         drawButtons();
 
         if (Mouse.isButtonDown(0))
         {
-            for (GUIButton b : buttons.keySet())
+            for (Button b : buttons.keySet())
             {
                 if (b.isClicked())
                 {
@@ -71,12 +97,11 @@ public class Menu extends Scene
     {
         int buttonCount = buttons.keySet().size();
 
-        for (GUIButton b : buttons.keySet())
+        for (Button b : buttons.keySet())
         {
             b.update();
             if (Display.wasResized())
             {
-                System.out.println("fixing buttons");
                 int x = (Display.getWidth() / 2) - (b.getHitBox().getWidth() / 2);
                 int y = (Display.getHeight() / 2) - (b.getHitBox().getHeight() * buttonCount) - ((buttonCount - buttons.keySet().size()) * 16);
                 b.getHitBox().setLocation(x, y);
@@ -87,7 +112,7 @@ public class Menu extends Scene
 
     public void drawButtons()
     {
-        for (GUIButton b : buttons.keySet())
+        for (Button b : buttons.keySet())
         {
             b.draw();
         }
