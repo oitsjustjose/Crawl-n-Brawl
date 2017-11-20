@@ -74,7 +74,7 @@ public class Dungeon extends SceneLevel
         this.player = player;
         this.entityManager.addEntity(this.player);
         this.level = level;
-        this.maxLevels = 1;
+        this.maxLevels = 24;
 
         initFont();
         initScene();
@@ -112,12 +112,12 @@ public class Dungeon extends SceneLevel
         {
             tileManager.addTile(new TileDecoration("wall_decor_", 4).changeColor(c));
         }
-        if (this.level % 5 == 0)
+        if (this.level % 3 == 0)
         {
-            if (getItemAtStage(level / 5) != null)
+            if (getItemAtStage(level / 3) != null)
             {
                 AudioManager.getInstance().play("level_up");
-                entityManager.addEntity(new EntityItem(getItemAtStage(level / 5), Display.getWidth() / 2, Display.getHeight() - 32, -1));
+                entityManager.addEntity(new EntityItem(getItemAtStage(level / 3), Display.getWidth() / 2, Display.getHeight() - 32, -1));
             }
         }
 
